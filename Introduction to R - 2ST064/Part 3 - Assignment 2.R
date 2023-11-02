@@ -21,7 +21,7 @@
 # Example: it takes a=4, and b=3 and should return sqrt(4*4 + 3*3) = sqrt(16 + 9) = sqrt(25) = 5.
 
 Root_sum_squares <- function(a, b) {
-  return(sqrt((a * a) + (b * b)))
+  return(sqrt(a^2 + b^2))
 }
 
 #Q2
@@ -36,13 +36,13 @@ Root_sum_squares <- function(a, b) {
 #c)
 # Ensure the function returns an error if any of p1 or p2 has a length other than 2.
 # !important: Do not change the error message in the example below (keep the stop and the message after, alter only inside the if()).
-Distance <- function(p1 = c(3, 0), p2 = c(0, 4)) {
+Distance <- function(p1=c(3, 0), p2=c(0, 4)) {
   #alter the if() below for c)
   #Note that currently this function always creates an error, including if you upload it to the server for testing other answers
-  if (length(p1) > 2 | length(p2) > 2) {
+  if (length(p1) != 2 | length(p2) != 2) {
     stop('The length of either p1 or p2 is not two')
   }
-  return(Root_sum_squares(p1[1] - p1[1], p2[2] - p2[2]))
+  return(Root_sum_squares(p1[1] - p2[1], p1[2] - p2[2]))
 }
 
 #Q3
@@ -61,11 +61,12 @@ m2 <- data.frame(x = c(0, 0, 4), y = c(0, 5, 0))
 Distance_matrix <- function(m, n) {
   output <- matrix(0, nrow = nrow(m), ncol = nrow(n))
   # Alter the loops and the objects being assigned to the Distance function:
-  for (i in nrow(m)) {
-    for (j in nrow(n)) {
-      output[i, j] <- Distance(m[i,], n[j,])
+  for (i in 1:nrow(m)) {
+    for (j in 1:nrow(n)) {
+      output[i,j] <- Distance(as.numeric(m[i,]), as.numeric(n[j,]))
     }
   }
+
   return(output)
 }
 
