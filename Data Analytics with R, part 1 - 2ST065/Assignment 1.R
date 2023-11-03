@@ -29,12 +29,12 @@ highest_corr <- max(correlations_copy)
 # 6. Sleep time distribution
 sleep_histogram <- ggplot(msleep, aes(x = sleep_total)) +
   geom_histogram(binwidth = 1, fill = "blue", color = "black") +
-  labs(x = "Total Sleep Time", y = "Count", title = "Distribution of Sleep Times")
+  labs(x = "Total Sleep Time", y = "Count", title = "Sleep Times")
 
 # 7. Bar chart for food categories
 food_barchart <- ggplot(msleep, aes(x = vore)) +
   geom_bar(fill = "blue", color = "black") +
-  labs(x = "Food Category", y = "Count", title = "Number of Mammals in Each Food Category")
+  labs(x = "Food Category", y = "Count", title = "Mammals in Each Food Category")
 
 # 8. Grouped box plot for sleep time
 sleep_boxplot <- ggplot(msleep, aes(x = vore, y = sleep_total)) +

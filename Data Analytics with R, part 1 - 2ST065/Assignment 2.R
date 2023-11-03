@@ -32,8 +32,9 @@ model1 <- lm(Sepal.Length ~ Sepal.Width, data = iris)
 # (Intercept)  Sepal.Width
 #      6.5262      -0.2234
 
-# The estimated coefficient for Sepal.Width in model1 is negative, which is consistent with the negative correlation coefficient we found in Task 1 and the negative relationship we observed in Task 2.
-# However, the magnitude of the coefficient in model1 is larger than the correlation coefficient in Task 1, which suggests that the relationship between Sepal.Width and Sepal.Length may not be perfectly linear.
+# The estimated coefficient for Sepal.Width in model1 is negative,
+# which is consistent with the negative correlation coefficient we found in Task 1 and the negative relationship we observed in Task 2.
+# However, the magnitude of the coefficient in model1 is larger than the correlation coefficient in Task 1.
 
 # 4. Setosa correlations
 correlations_setosa <- cor(subset(iris, Species == "setosa")[, 1:4])
@@ -46,8 +47,7 @@ correlations_setosa <- cor(subset(iris, Species == "setosa")[, 1:4])
 # Petal.Length    0.2671758   0.1777000    1.0000000   0.3316300
 # Petal.Width     0.2780984   0.2327520    0.3316300   1.0000000
 
-# The correlations between Sepal.Length and Sepal.Width, Sepal.Length and Petal.Length, and Sepal.Length and Petal.Width are all positive,
-# while the correlation between Sepal.Width and Petal.Length and Sepal.Width and Petal.Width are both negative.
+# All features are positive correlated
 # These correlations are different from the overall correlations we found earlier because they are specific to the setosa species,
 # while the overall correlations were calculated using all the species in the dataset.
 
@@ -56,7 +56,7 @@ plot2 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
 # Does this match the correlations we computed for setosa flowers?
 
 # It matches the correlations as Sepal.Width and Sepal.Length are positively correlated with 0.7425467, hence, as Sepal.Width increases
-# Sepal.Length also increases. Which is what see in plot2 - a almost lineary correlation.
+# Sepal.Length also increases, which is what we see in plot2 - a almost lineary correlation.
 
 # 6. Fit second model using species and Sepal.Width as predictors and Sepal.Length as response
 model2 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
@@ -67,13 +67,13 @@ model2 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 #       (Intercept)        Sepal.Width  Speciesversicolor   Speciesvirginica
 #            2.2514             0.8036             1.4587             1.9468
 
-# Adding variable Species to the model allows us to estimate the effect of species on the relationship between Sepal.Width and Sepal.Length.
+# Adding Species to the model allows us to estimate the effect of species on the relationship between Sepal.Width and Sepal.Length.
 # The estimated coefficient for Sepal.Width in model2 is 0.8036, which means that for every one unit increase in Sepal.Width, we expect an increase of 0.8036 units in Sepal.Length.
 # The coefficients for the versicolor and virginica species are both positive, which means that these species have a higher average Sepal.Length than the setosa species,
 # Specifically, the estimated coefficient for versicolor is 1.4587, which means that on average, versicolor flowers have a Sepal.Length that is 1.4587 units higher than setosa flowers.
 # Similarly, the estimated coefficient for virginica is 1.9468, which means that on average, virginica flowers have a Sepal.Length that is 1.9468 units higher than setosa flowers.
 # By adding Specifies to the model, the coefficient represents the effect of Sepal.Width on Sepal.Length for the given species.
-# Therefore allowing us to estimate the average difference in Sepal.Length between the species.
+# Therefore allowing us to estimate the ~difference in Sepal.Length between the species.
 
 # 7. Predict the sepal length of a setosa with a sepal width of 3.6 cm
 newdata <- data.frame(Sepal.Width = 3.6, Species = "setosa")
@@ -108,7 +108,7 @@ logistic_model <- glm(formula = Outcome ~ Glucose, data = diabetes_data_copy, fa
 
 # 10. Compute the accuracy
 predicted_values <- ifelse(predict(logistic_model, type = "response") > 0.5, 1, 0)
-accuracy <- sum(predicted_values == (diabetes_data_copy)$Outcome) / nrow(diabetes_data_copy)
+accuracy <- sum(predicted_values == diabetes_data_copy$Outcome) / nrow(diabetes_data_copy)
 
 # Show the results of the logistic_model
 print(summary(logistic_model))
