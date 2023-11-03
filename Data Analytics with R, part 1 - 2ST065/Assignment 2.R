@@ -1,5 +1,7 @@
+library(ggplot2)
+
 # 1. Correlations
-correlations <- cor(iris[,1:4])
+correlations <- cor(iris[, 1:4])
 
 # 2. Plot Sepal.Width against Sepal.Length
 plot1 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) + geom_point()
@@ -8,7 +10,7 @@ plot1 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) + geom_point()
 model1 <- lm(Sepal.Length ~ Sepal.Width, data = iris)
 
 # 4. Setosa correlations
-correlations_setosa <- cor(subset(iris, Species == "setosa")[,1:4])
+correlations_setosa <- cor(subset(iris, Species == "setosa")[, 1:4])
 
 # 5. Plot Sepal.Width against Sepal.Length, color by species
 plot2 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + geom_point()
