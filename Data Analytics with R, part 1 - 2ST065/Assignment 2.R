@@ -11,10 +11,8 @@ correlations <- cor(iris[, 1:4])
 # Petal.Length    0.8717538  -0.4284401    1.0000000   0.9628654
 # Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
 
-# The correlations between Sepal.Length and Sepal.Width, Sepal.Length and Petal.Length, and Sepal.Length and Petal.Width are all positive,
-# while the correlation between Sepal.Width and Petal.Length and Sepal.Width and Petal.Width are both negative.
-# These correlations make sense because Sepal.Length and Petal.Length, as well as Sepal.Length and Petal.Width, are both positively correlated,
-# Similarly, Sepal.Width and Petal.Length, as well as Sepal.Width and Petal.Width, are both negatively correlated,
+# The correlations between Sepal.Length and Sepal.Width, Sepal.Width and Petal.Length, and Sepal.Wdith and Petal.Width are all negative.
+# The reset are positively correalated.
 
 # 2. Plot Sepal.Width against Sepal.Length
 plot1 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) + geom_point()
@@ -50,6 +48,8 @@ correlations_setosa <- cor(subset(iris, Species == "setosa")[, 1:4])
 # All features are positive correlated
 # These correlations are different from the overall correlations we found earlier because they are specific to the setosa species,
 # while the overall correlations were calculated using all the species in the dataset.
+# The setsoa correlation shows that all features are positively correlated.
+# In some cases, the correlations are almost linear (eg. Sepal.Length and Sepal.Width).
 
 # 5. Plot Sepal.Width against Sepal.Length, color by species
 plot2 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + geom_point()
@@ -104,12 +104,11 @@ correlations_outcome <- cor(diabetes_data_copy)
 # Age                       0.3144350
 
 # 9. Find a good logistic regression model
-logistic_model <- glm(formula = Outcome ~ Glucose, data = diabetes_data_copy, family = binomial)
+logistic_model <- glm(formula = Outcome ~ Glucose + Pregnancies + SkinThickness, data = diabetes_data_copy, family = binomial)
 
 # 10. Compute the accuracy
 predicted_values <- ifelse(predict(logistic_model, type = "response") > 0.5, 1, 0)
-accuracy <- sum(predicted_values == diabetes_data_copy$Outcome) / nrow(diabetes_data_copy)
+accuracy <- sum(predicted_values == (diabetes_data_copy)$Outcome) / nrow(diabetes_data_copy)
 
 # Show the results of the logistic_model
-print(summary(logistic_model))
 print(accuracy)
