@@ -45,11 +45,10 @@ correlations_setosa <- cor(subset(iris, Species == "setosa")[, 1:4])
 # Petal.Length    0.2671758   0.1777000    1.0000000   0.3316300
 # Petal.Width     0.2780984   0.2327520    0.3316300   1.0000000
 
-# All features are positive correlated
+# All features are positive correlated.
+# In some cases, the correlations are almost linear (eg. Sepal.Length and Sepal.Width).
 # These correlations are different from the overall correlations we found earlier because they are specific to the setosa species,
 # while the overall correlations were calculated using all the species in the dataset.
-# The setsoa correlation shows that all features are positively correlated.
-# In some cases, the correlations are almost linear (eg. Sepal.Length and Sepal.Width).
 
 # 5. Plot Sepal.Width against Sepal.Length, color by species
 plot2 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + geom_point()
