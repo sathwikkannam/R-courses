@@ -90,18 +90,11 @@ diabetes_data <- read.csv("a2_diabetes.csv")
 diabetes_data_copy <- na.omit(diabetes_data[, c("Outcome", "Glucose", "Pregnancies", "SkinThickness")])
 
 # Correlations between Outcome and other features
-correlations_outcome <- cor(diabetes_data_copy)
+correlations_outcome <- cor(diabetes_data_copy)[1, -1]
 
 # Output:
-#                          Outcome
-# Pregnancies               0.2488099
-# Glucose                   0.5437695
-# BloodPressure             0.2162127
-# SkinThickness             0.2965518
-# Insulin                   0.3041094
-# BMI                       0.2826541
-# DiabetesPedigreeFunction  0.1481706
-# Age                       0.3144350
+#       Glucose   Pregnancies SkinThickness
+#     0.5264784     0.2589347     0.2747623
 
 # 9. Find a good logistic regression model
 logistic_model <- glm(formula = Outcome ~ ., data = diabetes_data_copy, family = binomial)
