@@ -87,7 +87,7 @@ prediction <- predict(model2, newdata)
 
 # 8. Load the Pima Indian diabetes .csv into R
 diabetes_data <- read.csv("a2_diabetes.csv")
-diabetes_data_copy <- na.omit(diabetes_data)
+diabetes_data_copy <- na.omit(diabetes_data[, c("Outcome", "Glucose", "Pregnancies", "SkinThickness")])
 
 # Correlations between Outcome and other features
 correlations_outcome <- cor(diabetes_data_copy)
@@ -104,11 +104,11 @@ correlations_outcome <- cor(diabetes_data_copy)
 # Age                       0.3144350
 
 # 9. Find a good logistic regression model
-logistic_model <- glm(formula = Outcome ~ Glucose + Pregnancies + SkinThickness, data = diabetes_data_copy, family = binomial)
+logistic_model <- glm(formula = Outcome ~ ., data = diabetes_data_copy, family = binomial)
 
 # 10. Compute the accuracy
 predicted_values <- ifelse(predict(logistic_model, type = "response") > 0.5, 1, 0)
-accuracy <- sum(predicted_values == (diabetes_data_copy)$Outcome) / nrow(diabetes_data_copy)
+accuracy <- sum(predicted_values == diabetes_data_copy$Outcome) / nrow(diabetes_data_copy)
 
 # Show the results of the logistic_model
 print(accuracy)
