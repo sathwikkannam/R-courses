@@ -101,6 +101,3 @@ logistic_model <- glm(formula = Outcome ~ ., data = diabetes_data_copy, family =
 # 10. Compute the accuracy
 predicted_values <- ifelse(predict(logistic_model, type = "response") > 0.5, 1, 0)
 accuracy <- sum(predicted_values == diabetes_data_copy$Outcome) / nrow(diabetes_data_copy)
-
-# Show the results of the logistic_model
-print(accuracy)
