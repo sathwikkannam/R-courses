@@ -12,7 +12,7 @@ correlations <- cor(iris[, 1:4])
 # Petal.Width     0.8179411  -0.3661259    0.9628654   1.0000000
 
 # The correlations between Sepal.Length and Sepal.Width, Sepal.Width and Petal.Length, and Sepal.Wdith and Petal.Width are all negative.
-# The reset are positively correalated.
+# The rest are positively correalated.
 
 # 2. Plot Sepal.Width against Sepal.Length
 plot1 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length)) + geom_point()
@@ -49,6 +49,8 @@ correlations_setosa <- cor(subset(iris, Species == "setosa")[, 1:4])
 # In some cases, the correlations are almost linear (eg. Sepal.Length and Sepal.Width).
 # These correlations are different from the overall correlations we found earlier because they are specific to the setosa species,
 # while the overall correlations were calculated using all the species in the dataset.
+# For example, Sepal.Length and Sepal.Width are strongly correlated in Setosa species. On the other hand, the overall correlation between
+# Sepal.Length and Sepal.Width is very weak, and almost insignificant .
 
 # 5. Plot Sepal.Width against Sepal.Length, color by species
 plot2 <- ggplot(iris, aes(x = Sepal.Width, y = Sepal.Length, color = Species)) + geom_point()
@@ -66,13 +68,10 @@ model2 <- lm(Sepal.Length ~ Sepal.Width + Species, data = iris)
 #       (Intercept)        Sepal.Width  Speciesversicolor   Speciesvirginica
 #            2.2514             0.8036             1.4587             1.9468
 
-# Adding Species to the model allows us to estimate the effect of species on the relationship between Sepal.Width and Sepal.Length.
-# The estimated coefficient for Sepal.Width in model2 is 0.8036, which means that for every one unit increase in Sepal.Width, we expect an increase of 0.8036 units in Sepal.Length.
-# The coefficients for the versicolor and virginica species are both positive, which means that these species have a higher average Sepal.Length than the setosa species,
-# Specifically, the estimated coefficient for versicolor is 1.4587, which means that on average, versicolor flowers have a Sepal.Length that is 1.4587 units higher than setosa flowers.
-# Similarly, the estimated coefficient for virginica is 1.9468, which means that on average, virginica flowers have a Sepal.Length that is 1.9468 units higher than setosa flowers.
-# By adding Specifies to the model, the coefficient represents the effect of Sepal.Width on Sepal.Length for the given species.
-# Therefore allowing us to estimate the ~difference in Sepal.Length between the species.
+# The coeffient makes sense as it is similiar to what we found in the correlation above -- positive correlation.
+# Adding Species to the model allows it to capture the effect of Species as well as Sepal.Width.
+# For example, Sepal.Length is expected to increase by 0.8036 units for every unit increase in Sepal.Width,
+# while isolating Sepal.Width and ignoring the effect (constant effect) of Speciesversicolor and Speciesvirginica.
 
 # 7. Predict the sepal length of a setosa with a sepal width of 3.6 cm
 newdata <- data.frame(Sepal.Width = 3.6, Species = "setosa")
