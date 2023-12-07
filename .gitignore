@@ -1,5 +1,6 @@
 .idea/
 Part 4 - Quiz.R
+*.docx
 *.csv
 # History files
 .Rhistory

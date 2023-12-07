@@ -37,8 +37,30 @@ if (all_significant) {
   print("Not all features have a significance level of at least 5%.")
 }
 
-# Compute the accuracy
-predicted_values <- ifelse(predict(logistic_model, type = "response") > 0.65, 1, 0)
+
+# Identity the best threshold for the decision rule
+thresholds <- seq(0.2, 0.8, 0.01)
+accuracies <- sapply(thresholds, function(threshold) {
+  predicted_values <- ifelse(predict(logistic_model, type = "response") > threshold, 1, 0)
+  sum(predicted_values == covid_train$dead) / nrow(covid_train)
+})
+
+# Plot the threshold vs accuracy graph
+df <- data.frame(thresholds, accuracies)
+ggplot(df, aes(x = thresholds, y = accuracies)) +
+  geom_line() +
+  labs(title = "Threshold vs Accuracy", x = "Threshold", y = "Accuracy")
+
+# Best threshold with the highest accuracy
+best_threshold <- thresholds[which.max(accuracies)]
+
+
+# Create a logistic regressor with the best threshold.
+predicted_values <- ifelse(predict(logistic_model, type = "response") > best_threshold, 1, 0)
 accuracy <- sum(predicted_values == covid_train$dead) / nrow(covid_train)
 
+# Export the summary of the model to a CSV file
+write.csv(summary(logistic_model)$coefficients, file = "model_summary.csv")
+
+print(model_summary)
 print(accuracy)
