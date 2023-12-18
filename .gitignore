@@ -2,6 +2,7 @@
 Part 4 - Quiz.R
 *.docx
 *.csv
+*.pdf
 # History files
 .Rhistory
 .Rapp.history

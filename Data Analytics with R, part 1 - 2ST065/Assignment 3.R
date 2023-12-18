@@ -7,7 +7,7 @@ library(corrplot)
 covid <- na.omit(read.csv("Data/covid19.csv"))
 
 # Remove "NA" values specified by 999
-covid <- covid[!apply(covid == 999, 1, any), ]
+covid <- covid[!apply(covid == 999, 1, any),]
 
 # Find correlations
 correlations <- cor(covid)
@@ -25,7 +25,7 @@ logistic_model <- glm(formula = dead ~ ., data = covid_train, family = binomial)
 model_summary <- summary(logistic_model)
 
 # Get p-values
-p_values <- model_summary$coefficients[,4]
+p_values <- model_summary$coefficients[, 4]
 
 # Check if all features have p-value less than 0.05
 all_significant <- all(p_values < 0.05)
